@@ -70,7 +70,7 @@ const Assessment = () => {
       setSuggestedGoal(finalGoal);
     }
 
-    setFormData(prev => ({ ...prev, goal: finalGoal }));
+    setUserProfile({ ...formData, goal: finalGoal, bmi });
     setStep(1); // Move to diet preferences step
   };
 

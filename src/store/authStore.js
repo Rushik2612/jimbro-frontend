@@ -15,6 +15,7 @@ const useAuthStore = create(
         fitnessLevel: 'Beginner',
         bmi: null,
         tdee: null,
+        dietPreference: '',
       },
       dietPlan: null,
       workoutPlan: null,
