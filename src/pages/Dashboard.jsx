@@ -8,7 +8,7 @@ import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
   CartesianGrid, AreaChart, Area
 } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import useAuthStore from '../store/authStore';
 
 // ─── Motivational tips ───────────────────────────────────────
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user?.id) {
-      axios.get(`http://localhost:8080/api/chat/logs/${user.id}`)
+      axiosInstance.get(`/chat/logs/${user.id}`)
         .then(res => {
           const data = res.data;
           setLogs(data);

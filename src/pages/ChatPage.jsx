@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, Bot, User } from 'lucide-react';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import useAuthStore from '../store/authStore';
 import './ChatPage.css';
 
-const API_BASE = 'http://localhost:8080/api/chat';
+const API_BASE = '/chat';
 
 const ChatPage = () => {
   const { user, userProfile, setDietPlan, setWorkoutPlan, setReminders, reminders, pendingChatMessage, setPendingChatMessage } = useAuthStore();
@@ -31,7 +31,7 @@ const ChatPage = () => {
   const fetchHistory = async () => {
 
     try {
-      const res = await axios.get(`${API_BASE}/history/${user.id}`);
+      const res = await axiosInstance.get(`${API_BASE}/history/${user.id}`);
       setMessages(res.data);
     } catch (err) {
       console.error('Failed to load history', err);
@@ -66,7 +66,7 @@ const ChatPage = () => {
         userContext = `The user hasn't set their stats yet. Give general advice.`;
       }
 
-      const res = await axios.post(`${API_BASE}/send`, {
+      const res = await axiosInstance.post(`${API_BASE}/send`, {
         userId: user.id,
         message: userMsg,
         userContext: userContext

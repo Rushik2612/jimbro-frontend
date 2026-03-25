@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import { Activity, ArrowRight, Salad, CheckCircle, Edit3, ChevronDown } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 
@@ -92,7 +92,7 @@ const Assessment = () => {
 
     try {
       const payload = { ...formData, dietPreference: dietPref };
-      const res = await axios.post('http://localhost:8080/api/chat/generate-plans', payload);
+      const res = await axiosInstance.post('/chat/generate-plans', payload);
       const { workoutPlan, dietPlan } = res.data;
       setGeneratedPlans({ workoutPlan, dietPlan });
       setUserProfile({ ...formData, bmi, tdee, dietPreference: dietPref });
@@ -116,7 +116,7 @@ const Assessment = () => {
     if (!dietChangesRequest.trim()) return;
     setDietLoading(true);
     try {
-      const res = await axios.post('http://localhost:8080/api/chat/revise-diet', {
+      const res = await axiosInstance.post('/chat/revise-diet', {
         currentDiet: generatedPlans.dietPlan,
         changeRequest: dietChangesRequest,
         userProfile: formData,
