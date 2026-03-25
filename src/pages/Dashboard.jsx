@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user?.id) {
-      axiosInstance.get(`/chat/logs/${user.id}`)
+      axiosInstance.get(`/api/chat/logs/${user.id}`)
         .then(res => {
           const data = res.data;
           setLogs(data);

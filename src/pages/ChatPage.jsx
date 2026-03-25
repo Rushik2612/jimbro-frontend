@@ -4,7 +4,7 @@ import axiosInstance from '../api/axiosInstance';
 import useAuthStore from '../store/authStore';
 import './ChatPage.css';
 
-const API_BASE = '/chat';
+const API_BASE = '/api/chat';
 
 const ChatPage = () => {
   const { user, userProfile, setDietPlan, setWorkoutPlan, setReminders, reminders, pendingChatMessage, setPendingChatMessage } = useAuthStore();

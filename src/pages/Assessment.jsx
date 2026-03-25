@@ -92,7 +92,7 @@ const Assessment = () => {
 
     try {
       const payload = { ...formData, dietPreference: dietPref };
-      const res = await axiosInstance.post('/chat/generate-plans', payload);
+      const res = await axiosInstance.post('/api/chat/generate-plans', payload);
       const { workoutPlan, dietPlan } = res.data;
       setGeneratedPlans({ workoutPlan, dietPlan });
       setUserProfile({ ...formData, bmi, tdee, dietPreference: dietPref });
@@ -116,7 +116,7 @@ const Assessment = () => {
     if (!dietChangesRequest.trim()) return;
     setDietLoading(true);
     try {
-      const res = await axiosInstance.post('/chat/revise-diet', {
+      const res = await axiosInstance.post('/api/chat/revise-diet', {
         currentDiet: generatedPlans.dietPlan,
         changeRequest: dietChangesRequest,
         userProfile: formData,
